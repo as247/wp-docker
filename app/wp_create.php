@@ -1,19 +1,24 @@
 #!/usr/bin/env php
 <?php
-define('WORKING_DIR',__DIR__);//Root data dir
+
 define('BASE_DIR',__DIR__);//this script dir
-$domain=$argv[1]??die('Pls specified domain');
+define('WORKING_DIR',trim(file_get_contents(__DIR__.'/.root')));//Root data dir
+echo WORKING_DIR.PHP_EOL;
+echo BASE_DIR.PHP_EOL;
+$domain=$argv[1]??die('Pls specified domain'.PHP_EOL);
 
 echo 'Domain: '.$domain.PHP_EOL;
 $domainDir=WORKING_DIR.'/'.$domain;
 $webDir=$domainDir.'/web';
 $dbDir=$domainDir.'/db';
 $phpIniPath=$domainDir.'/php.ini';
-copy(__DIR__.'/php.ini',$phpIniPath);
-@mkdir($domain);
+echo "create $domainDir".PHP_EOL;
+@mkdir($domainDir);
+echo "create $webDir".PHP_EOL;
 @mkdir($webDir);
+echo "create $dbDir".PHP_EOL;
 @mkdir($dbDir);
-
+copy(__DIR__.'/php.ini',$phpIniPath);
 $dockerCompose=file_get_contents(__DIR__.'/docker-compose-template.yml');
 $replacements=[
 	'{web_path}'=>$webDir,

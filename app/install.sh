@@ -1,9 +1,10 @@
 #!/bin/bash
-
-mkdir /wp
-cp ./docker-compose-nginx-proxy.yml /wp/docker-compose.yml
-cp ./docker-compose-template.yml /wp/docker-compose-template.yml
-cp wp_create.php /wp/wp_create
-chmod +x wp_create
+WP_ROOT_DIR=/wp
+mkdir $WP_ROOT_DIR
+cp -r app /usr/local/wp-docker
+echo $WP_ROOT_DIR > /usr/local/wp-docker/.root
+cp /usr/local/wp-docker/docker-compose-nginx-proxy.yml /wp/docker-compose.yml
+chmod +x /usr/local/wp-docker/wp_create.php
+ln -s /usr/local/wp-docker/wp_create.php /usr/local/bin/wp_create
 docker network create nginx-proxy
 
