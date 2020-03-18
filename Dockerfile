@@ -179,7 +179,7 @@ ENV WORDPRESS_VERSION 5.3.2
 ENV WORDPRESS_SHA1 fded476f112dbab14e3b5acddd2bcfa550e7b01b
 
 RUN set -ex; \
-    curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
+    curl -o /usr/local/bin/wp http://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
     chmod +x /usr/local/bin/wp; \
 	curl -o wordpress.tar.gz -k "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"; \
 	echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c -; \
