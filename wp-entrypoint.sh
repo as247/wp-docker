@@ -280,7 +280,7 @@ EOPHP
 		unset "$e"
 	done
 fi
-ls .
+
 if [ -e post-install.sh ]; then
   chmod +x post-install.sh
   ./post-install.sh
