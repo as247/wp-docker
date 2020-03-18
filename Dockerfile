@@ -87,6 +87,8 @@ RUN set -eux; \
 	apt-get install -y --no-install-recommends \
 # Ghostscript is required for rendering PDF previews
 		ghostscript \
+		#less for wp cli
+		less \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
