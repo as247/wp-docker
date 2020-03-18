@@ -179,19 +179,17 @@ ENV WORDPRESS_VERSION 5.3.2
 ENV WORDPRESS_SHA1 fded476f112dbab14e3b5acddd2bcfa550e7b01b
 
 RUN set -ex; \
-    curl -o /usr/local/bin/wp http://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
-    chmod +x /usr/local/bin/wp; \
 	curl -o wordpress.tar.gz -k "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"; \
 	echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c -; \
 # upstream tarballs include ./wordpress/ so this gives us /usr/src/wordpress
 	tar -xzf wordpress.tar.gz -C /usr/src/; \
 	rm wordpress.tar.gz; \
 	chown -R www-data:www-data /usr/src/wordpress
-
+COPY wp-cli.phar /usr/local/bin/wp
 COPY wp-entrypoint.sh /usr/local/bin/
 COPY docker-entrypoint.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/*-entrypoint.sh
+RUN chmod +x /usr/local/bin/*-entrypoint.sh /usr/local/bin/wp
 
 EXPOSE 3306 80
 
