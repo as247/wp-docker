@@ -280,7 +280,8 @@ docker_setup_db() {
 		docker_process_sql --database=mysql <<<"FLUSH PRIVILEGES ;"
 
 		if [ -e /usr/src/wordpress.sql ]; then
-		  docker_process_sql </usr/src/wordpress.sql
+		  mysql_note "Import database from /usr/src/wordpress.sql"
+		  docker_process_sql < /usr/src/wordpress.sql
     fi
 	fi
 }

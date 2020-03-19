@@ -187,6 +187,7 @@ RUN set -ex; \
 	tar -xzf wordpress.tar.gz -C /usr/src/; \
 	rm wordpress.tar.gz; \
 	chown -R www-data:www-data /usr/src/wordpress
+COPY wp-install.sh /usr/local/bin/
 COPY wp-cli.phar /usr/local/bin/wp
 COPY wp-entrypoint.sh /usr/local/bin/
 COPY docker-entrypoint.sh /usr/local/bin/
